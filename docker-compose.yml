@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  jenkins:
+    container_name: geb-jenkins
+    hostname: geb-jenkins
+    build:
+      context: ./jenkins/
+      dockerfile: Dockerfile
+    image: 'geb-jenkins'
+    # 1024*1024*1024 = 536870912 Byte = 1 GiB
+    mem_limit: 1073741824
+    ports:
+      - 8080:8080
+#    networks:
+#      - dev
+    privileged: false
+    volumes:
+      - .:/pipeline-dev
+#      - ./src:/var/jenkins_home/geb-test/src
+#      - ./gradle:/var/jenkins_home/geb-test/gradle
+#      - ./gradlew:/var/jenkins_home/geb-test/gradlew
+#      - ./build.gradle:/var/jenkins_home/geb-test/build.gradle
+#      - ./Jenkinsfile:/var/jenkins_home/geb-test/Jenkinsfile
+#      - ./puppeteer:/var/jenkins_home/geb-test/puppeteer
+#      - ./package.json:/var/jenkins_home/geb-test/package.json
