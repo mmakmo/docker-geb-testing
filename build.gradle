@@ -33,6 +33,11 @@ dependencies {
     // If using JUnit, need to depend on geb-junit (3 or 4)
     testCompile "org.gebish:geb-junit4:$gebVersion"
 
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    testCompile('org.apache.commons:commons-lang3:3.7')
+
+
+
     // Drivers
     testCompile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
     testCompile "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"

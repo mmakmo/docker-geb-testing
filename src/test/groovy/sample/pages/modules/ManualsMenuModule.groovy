@@ -1,4 +1,4 @@
-package pages.modules
+package sample.pages.modules
 
 import geb.Module
 

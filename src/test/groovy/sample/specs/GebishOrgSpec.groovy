@@ -1,9 +1,9 @@
-package specs
+package sample.specs
 
 import geb.spock.GebSpec
 import org.openqa.selenium.Dimension
-import pages.GebishOrgHomePage
-import pages.TheBookOfGebPage
+import sample.pages.GebishOrgHomePage
+import sample.pages.TheBookOfGebPage
 
 class GebishOrgSpec extends GebSpec {
 
