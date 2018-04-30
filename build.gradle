@@ -1,5 +1,6 @@
 plugins {
     id "idea"
+    id "java"
     id "groovy"
     id "com.energizedwork.webdriver-binaries" version "1.4"
     id "com.energizedwork.idea-base" version "1.2"
@@ -36,8 +37,6 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     testCompile('org.apache.commons:commons-lang3:3.7')
 
-
-
     // Drivers
     testCompile "org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion"
     testCompile "org.seleniumhq.selenium:selenium-firefox-driver:$seleniumVersion"
@@ -62,7 +61,8 @@ drivers.each { driver ->
         systemProperty "geb.build.reportsDir", reporting.file("geb/$name")
         systemProperty "geb.env", driver
 
-        systemProperty "profile", System.getProperty("profile", "production")
+        systemProperty "environment", System.getProperty("environment", "production")
+        systemProperty "device", System.getProperty("device", "pc")
 
         // If you wanted to set the baseUrl in your build…
         // systemProperty "geb.build.baseUrl", "http://myapp.com"
@@ -70,9 +70,26 @@ drivers.each { driver ->
     }
 }
 
+//test {
+//    dependsOn drivers.collect { tasks["${it}Test"] }
+//    enabled = false
+//    useJUnit {
+//        includeCategories "sample.infrastruture.testtypes.${project.testType}Test"
+//    }
+//
+//}
+
+
 test {
-    dependsOn drivers.collect { tasks["${it}Test"] }
-    enabled = false
+    useJUnit {
+        dependsOn drivers.collect { tasks["${it}Test"] }
+        enabled = false
+        includeCategories 'com.testwithspring.master.UnitTest'
+//        includeCategories "sample.infrastruture.testtypes.${project.testType}Test"
+    }
+    testLogging {
+        showStandardStreams = true
+    }
 }
 
 tasks.withType(Test) {

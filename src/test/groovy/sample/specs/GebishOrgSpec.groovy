@@ -1,15 +1,17 @@
 package sample.specs
 
 import geb.spock.GebSpec
-import org.openqa.selenium.Dimension
+import sample.infrastructure.configurations.DeviceSettings
 import sample.pages.GebishOrgHomePage
 import sample.pages.TheBookOfGebPage
 
+//@Category(RedirectionTest)
 class GebishOrgSpec extends GebSpec {
 
     def "can get to the current Book of Geb"() {
         given:
-        driver.manage().window().size = new Dimension(640, 960)
+        DeviceSettings deviceSettings = new DeviceSettings()
+        driver.manage().window().size = deviceSettings.getDeviceSize()
 
         when:
         to GebishOrgHomePage

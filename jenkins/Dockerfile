@@ -12,7 +12,7 @@ RUN \
 RUN apt-get update &&\
     apt-get install -y curl &&\
     # Dependencies to make "headless" chrome/selenium work:
-    apt-get -y install xorg xvfb gtk2-engines-pixbuf &&\
+#    apt-get -y install xorg xvfb gtk2-engines-pixbuf &&\
     apt-get -y install dbus-x11 xfonts-base xfonts-100dpi xfonts-75dpi xfonts-cyrillic \
         fonts-liberation xdg-utils libxss1 libappindicator1 libindicator7 libxi6 libgconf-2-4 \
         # Optional but nifty: For capturing screenshots of Xvfb display:
