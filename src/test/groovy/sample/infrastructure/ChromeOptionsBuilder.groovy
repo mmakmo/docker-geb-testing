@@ -1,6 +1,5 @@
 package sample.infrastructure
 
-import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.chrome.ChromeOptions
 import sample.infrastructure.configurations.ProxySettings
 
@@ -16,7 +15,7 @@ class ChromeOptionsBuilder {
         options.addArguments('test-type')
     }
 
-    ChromeOptionsBuilder withProxu() {
+    ChromeOptionsBuilder withProxy() {
         ProxySettings proxySettings = new ProxySettings()
         Proxy proxy = new Proxy()
         proxy.setHttpProxy(proxySettings.getProxyUrl())
@@ -25,7 +24,17 @@ class ChromeOptionsBuilder {
         return this
     }
 
-    ChromeDriver build() {
+    ChromeOptionsBuilder withHeadless() {
+        options.addArguments("--headless")
+        return this
+    }
+
+    ChromeOptionsBuilder withDeviceType() {
+        options.addArguments("--window-size=640,480")
+        return this;
+    }
+
+    ChromeOptions build() {
         return options
     }
 

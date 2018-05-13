@@ -4,7 +4,12 @@
 
 1. execute `setup.sh`
 
-2. setup Windows 10 manually.
+1. setup Windows 10 manually.
+
+    - add `vagrant` user
+        - add user
+        - add ssh `authorized_keys` in `%HOME%/.ssh` directory
+
     - enable WinRM and install Chocolatey
 
         ```bash
@@ -15,16 +20,34 @@
         > net start winrm
 
         > Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-        > cinst -y git googlechrome firefox
+        > cinst -y git googlechrome firefox jenkins atom
         ```
 
+    - setup Jenkins
+        Access to http://localhost:8080
+
+    - change Jenkins configuration
+    
+        Target file: `C:/Program Files (x86)/Jenkins/config.xml`
+
+        `<useSecurity>true</useSecurity>` -> `<useSecurity>false</useSecurity>`
+
+    - create Jenkins Job
+
+        ```bash
+        cd c:\pipeline-dev
+        gradlew.bat ieTest -Denvironment=development -Ddevice=pc -PtestCategory=Redirection
+        ```
+        
     - change firewall settings
     
         ```bash
         # execute on PowerShell (as administrator)
         > netsh advfirewall firewall add rule name="Open Port 22" dir=in action=allow protocol=TCP localport=22
+        > netsh advfirewall firewall add rule name="Open Port 5901" dir=in action=allow protocol=TCP localport=5901
         > netsh advfirewall firewall add rule name="Open Port 5985" dir=in action=allow protocol=TCP localport=5985
         > netsh advfirewall firewall add rule name="Open Port 5986" dir=in action=allow protocol=TCP localport=5986
+        > netsh advfirewall firewall add rule name="Open Port 8080" dir=in action=allow protocol=TCP localport=8080
         ```
     - install windows update tool
 
@@ -67,7 +90,7 @@
         $ vagrant reload
         ```
 
-3. create vagrant package for testing
+1. create vagrant package for testing
     ```bash
     $ vagrant package --base "win10_edge" --output "~/.vagrantbox/win10_edge_for_testing.box" --Vagrantfile ../Vagrantfile
     ```

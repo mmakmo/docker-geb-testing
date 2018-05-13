@@ -1,23 +1,18 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-if  !Vagrant.has_plugin?("vagrant-reload")
-     if  !Vagrant.has_plugin?("vagrant-rdp")
-     	system('vagrant plugin install vagrant-reload')
-     end
-     if  !Vagrant.has_plugin?("vagrant-reload")
-     	system('vagrant plugin install vagrant-reload')
-     end
-     if  !Vagrant.has_plugin?("vagrant-vbguest")
-     	system('vagrant plugin install vagrant-reload')
-     end
-     if  !Vagrant.has_plugin?("vagrant-winrm-syncedfolders")
-     	system('vagrant plugin install vagrant-reload')
-     end
-
-     raise("Missing Plugins installed. Run command again.");
+if !Vagrant.has_plugin?("vagrant-rdp")
+    system('vagrant plugin install vagrant-rdp')
 end
-
+if !Vagrant.has_plugin?("vagrant-reload")
+    system('vagrant plugin install vagrant-reload')
+end
+if !Vagrant.has_plugin?("vagrant-vbguest")
+    system('vagrant plugin install vagrant-vbguest')
+end
+if !Vagrant.has_plugin?("vagrant-winrm-syncedfolders")
+    system('vagrant plugin install vagrant-syncedfolders')
+end
 
 Vagrant.configure("2") do |config|
   config.vm.box = "~/.vagrantbox/win10_edge_for_testing.box"
@@ -29,6 +24,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 22, host: 2222, id: "ssh", auto_correct: true
   config.vm.network "forwarded_port", guest: 5985, host: 55985, id: "winrm", auto_correct: true
   config.vm.network "forwarded_port", guest: 5986, host: 55986, id: "winrm-ssl", auto_correct: true
+  config.vm.network "forwarded_port", guest: 8080, host: 8888, id: "jenkins", auto_correct: true
 
   config.ssh.insert_key = false
 
@@ -37,7 +33,7 @@ Vagrant.configure("2") do |config|
     #vb.gui = true
     vb.name = "win10_edge_for_testing"
     vb.customize ["modifyvm", :id, "--memory", "1024"]
-    vb.customize ["modifyvm", :id, "--vram", "256"]
+    vb.customize ["modifyvm", :id, "--vram", "64"]
     vb.customize ["modifyvm", :id,  "--cpus", "2"]
     vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
@@ -53,12 +49,8 @@ Vagrant.configure("2") do |config|
 
   # winrm config, uses modern.ie default user/password. If other credentials are used must be changed here
   config.vm.guest = :windows
-  config.ssh.username = "IEUser"
-  config.ssh.password = "Passw0rd!"
   config.ssh.sudo_command = ''
 
-  config.rdp.width  = 1440 # default: 1024
-  config.rdp.height = 900  # default: 768
   config.vbguest.auto_update = true
   config.vbguest.no_remote = false
 
@@ -66,5 +58,7 @@ Vagrant.configure("2") do |config|
   config.winrm.username = "IEUser"
   config.winrm.password = "Passw0rd!"
   config.winrm.timeout = 180
+
+  config.vm.synced_folder "./", "c:/src"
 
 end

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/docker-geb-testing.iml" filepath="$PROJECT_DIR$/.idea/modules/docker-geb-testing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/docker-geb-testing.iml" filepath="$PROJECT_DIR$/docker-geb-testing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/docker-geb-testing_main.iml" filepath="$PROJECT_DIR$/.idea/modules/docker-geb-testing_main.iml" group="docker-geb-testing" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/docker-geb-testing_test.iml" filepath="$PROJECT_DIR$/.idea/modules/docker-geb-testing_test.iml" group="docker-geb-testing" />
+    </modules>
+  </component>
+</project>

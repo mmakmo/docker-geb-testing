@@ -6,13 +6,10 @@
 
 
 import org.openqa.selenium.chrome.ChromeDriver
-import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.firefox.FirefoxDriver
+import org.openqa.selenium.ie.InternetExplorerDriver
 import sample.infrastructure.ChromeOptionsBuilder
 import sample.infrastructure.FirefoxOptionsBuilder
-import sample.infrastructure.configurations.ProxySettings
-
-import java.util.logging.Logger
 
 waiting {
     timeout = 2
@@ -29,7 +26,7 @@ environments {
     chrome {
         driver = {
             ChromeOptionsBuilder builder = new ChromeOptionsBuilder()
-            new ChromeDriver(builder.build())
+            new ChromeDriver(builder.withDeviceType().build())
         }
     }
 
@@ -37,25 +34,8 @@ environments {
     // See: http://code.google.com/p/selenium/wiki/ChromeDriver
     chromeHeadless {
         driver = {
-            Logger logger = Logger.getLogger("")
-            logger.info("I am a test info log")
-
-            ProxySettings proxy = new ProxySettings()
-            proxy.setHttpProxy(proxyUrl)
-            proxy.setSslProxy(proxyUrl)
-
-
-            ChromeOptions options = new ChromeOptions()
-            options.setCapability("proxy", proxy)
-            options.setHeadless(true)
-//            options.addArguments('headless')
-            options.addArguments('no-sandbox')
-            options.addArguments('disable-gpu')
-            options.addArguments("--disable-extensions")
-            options.addArguments('test-type')
-
-            new ChromeDriver(options)
-
+            ChromeOptionsBuilder builder = new ChromeOptionsBuilder()
+            new ChromeDriver(builder.withDeviceType().withHeadless().build())
         }
     }
 
@@ -69,7 +49,7 @@ environments {
         }
     }
 
-    // run via “./gradlew firefoxTest”
+    // run via “./gradlew firefoxHeadlessTest”
     // See: http://code.google.com/p/selenium/wiki/FirefoxDriver
     firefoxHeadless {
         atCheckWaiting = 1
@@ -78,8 +58,17 @@ environments {
             new FirefoxDriver(builder.withHeadless().build())
         }
     }
+
+    // run via “./gradlew firefoxTest”
+    // See: http://code.google.com/p/selenium/wiki/FirefoxDriver
+
+    // https://qiita.com/ryotax/items/fc2b62c4b1712cb40ea9
+    ie {
+        atCheckWaiting = 1
+        driver = {
+            new InternetExplorerDriver()
+        }
+
+    }
+
 }
-
-// To run the tests with all browsers just run “./gradlew test”
-
-baseUrl = "http://gebish.org"
