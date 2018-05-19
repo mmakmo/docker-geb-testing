@@ -1,16 +1,17 @@
 package sample.specs
 
 import org.junit.experimental.categories.Category
-import sample.infrastructure.BaseGebSpec
-import sample.infrastructure.testCategory.Redirection
+import sample.infrastructure.testcategories.Walkthrough
 import sample.pages.GebishOrgHomePage
 import sample.pages.TheBookOfGebPage
+import sample.pages.base.BaseGebSpec
 
-@Category(Redirection)
-class GebishOrgSpec extends BaseGebSpec {
+@Category(Walkthrough)
+class GebishOrgWalkthroughSpec extends BaseGebSpec {
 
     def "can get to the current Book of Geb"() {
         given:
+        logger.info("[Walkthrough Test]")
         baseUrl = "http://gebish.org"
 
         when:

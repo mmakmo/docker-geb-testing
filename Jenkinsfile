@@ -8,7 +8,7 @@ pipeline {
     parameters {
         choice(name: 'ENV', choices: 'development\nproduction', description: 'Target environment')
         choice(name: 'TYPE', choices: 'redirection\nfullPath', description: 'Testing type.')
-        choice(name: 'BROWSER', choices: 'chromeHeadless\nfirefox\nall', description: 'Using browser(s) for testing.')
+        choice(name: 'BROWSER', choices: 'chrome\nfirefox\nfirefoxHeadless\nall', description: 'Using browser(s) for testing.')
     }
 
     stages {
@@ -17,7 +17,7 @@ pipeline {
                 script {
                     if (params.BROWSER == 'all') {
                         def browsers = [:]
-                        for (browser in ["chromeHeadless", "firefox"]) {
+                        for (browser in ["chrome", "firefox"]) {
                           def choice = browser
                           browsers[choice] = {
                             echo "Execute test uses ${choice}"

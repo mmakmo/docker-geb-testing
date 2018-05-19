@@ -1,5 +1,6 @@
 cloudbees-folder
 bouncycastle-api
+blueocean
 structs
 script-security
 workflow-step-api

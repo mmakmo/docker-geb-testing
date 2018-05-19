@@ -1,4 +1,4 @@
-package sample.infrastructure
+package sample.pages.base
 
 import geb.spock.GebReportingSpec
 import sample.infrastructure.configurations.DeviceSettings
@@ -10,11 +10,6 @@ class BaseGebSpec extends GebReportingSpec {
     Logger logger = Logger.getLogger("")
 
     def setupSpec() {
-//        if (!(driver instanceof ChromeDriver)) {
-//            DeviceSettings deviceSettings = new DeviceSettings()
-//            driver.manage().window().size = deviceSettings.getDeviceSize()
-//        }
-
         DeviceSettings deviceSettings = new DeviceSettings()
         driver.manage().window().size = deviceSettings.getDeviceSize()
 
