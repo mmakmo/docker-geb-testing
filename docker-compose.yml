@@ -15,4 +15,3 @@ services:
     privileged: false
     volumes:
       - .:/pipelineJob
-

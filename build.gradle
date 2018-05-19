@@ -37,7 +37,6 @@ dependencies {
     // If using JUnit, need to depend on geb-junit (3 or 4)
 //    testCompile "org.gebish:geb-junit4:$gebVersion"
 
-    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     testCompile('org.apache.commons:commons-lang3:3.7')
 
     // Drivers
@@ -68,13 +67,9 @@ drivers.each { driver ->
 
         systemProperty "environment", System.getProperty("environment", "production")
         systemProperty "device", System.getProperty("device", "pc")
-
-        // If you wanted to set the baseUrl in your build…
-        // systemProperty "geb.build.baseUrl", "http://myapp.com"
-
+        systemProperty "prooxy", System.getProperty("prooxy", "noProxy")
     }
 }
-
 
 test {
     useJUnit {
@@ -89,13 +84,6 @@ test {
     }
 }
 
-tasks.withType(Test) {
-    maxHeapSize = "1g"
-    jvmArgs '-XX:MaxMetaspaceSize=128m'
-    testLogging {
-        exceptionFormat = 'full'
-    }
-}
 
 tasks.withType(GroovyCompile) {
     groovyOptions.forkOptions.memoryMaximumSize = '256m'

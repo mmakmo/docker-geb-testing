@@ -1,4 +1,4 @@
 package sample.infrastructure.testcategories
 
-interface Walkthrough {
+interface Walkthrough extends AllTest {
 }

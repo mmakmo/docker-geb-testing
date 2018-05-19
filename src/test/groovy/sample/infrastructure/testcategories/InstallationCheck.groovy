@@ -1,4 +1,4 @@
 package sample.infrastructure.testcategories
 
-interface InstallationCheck {
+interface InstallationCheck extends AllTest {
 }
