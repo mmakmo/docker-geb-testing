@@ -20,7 +20,7 @@ RUN \
         imagemagick x11-apps
 
 # Install Firefox package
-RUN apt-get update &&\dock
+RUN apt-get update &&\
     apt-get install -y --no-install-recommends \
     firefox-esr
 

@@ -35,7 +35,7 @@
     - create Jenkins Job
 
         ```bash
-        cd c:\pipeline-dev
+        cd c:\pipelineJob
         gradlew.bat ieTest -Denvironment=development -Ddevice=pc -PtestCategory=Redirection
         ```
         
