@@ -4,6 +4,8 @@ FROM jenkins:latest
 
 USER root
 
+COPY keyboard /etc/default/keyboard
+
 RUN \
     echo 'root:root' |chpasswd &&\
     echo 'jenkins:jenkins' |chpasswd &&\

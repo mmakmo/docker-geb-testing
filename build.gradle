@@ -72,8 +72,12 @@ drivers.each { driver ->
 }
 
 test {
+    dependsOn drivers.collect { tasks["${it}Test"] }
+    enabled = false
+}
+
+tasks.withType(Test) {
     useJUnit {
-        dependsOn drivers.collect { tasks["${it}Test"] }
         if (project.hasProperty("testCategory")) {
             includeCategories "sample.infrastructure.testcategories." + project.getProperty("testCategory")
         }
@@ -83,7 +87,6 @@ test {
         }
     }
 }
-
 
 tasks.withType(GroovyCompile) {
     groovyOptions.forkOptions.memoryMaximumSize = '256m'
